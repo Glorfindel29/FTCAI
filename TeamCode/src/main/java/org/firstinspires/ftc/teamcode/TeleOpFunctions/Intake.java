@@ -3,13 +3,13 @@ package org.firstinspires.ftc.teamcode.TeleOpFunctions;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import org.firstinspires.ftc.teamcode.Controller.MotorControl;
 
-public class IntakeChild extends MotorControl
+public class Intake extends MotorControl
 {
 
     //Constructor calls parent constructor using hardcoded input
-    public IntakeChild(OpMode opmode)
+    public Intake(OpMode opmode)
     {
-        super("intake", false, false, opmode);
+        super("intake", false, false, opmode, null);
     }
 
     //Calls all methods and then is called itself in the OpMode loop

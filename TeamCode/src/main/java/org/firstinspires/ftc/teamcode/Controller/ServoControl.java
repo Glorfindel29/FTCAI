@@ -4,10 +4,10 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.util.Logging;
+
 
 public class ServoControl
 {
@@ -20,17 +20,23 @@ public class ServoControl
     protected Gamepad gamepad1;
     protected Gamepad gamepad2;
 
-    private ServoControl(OpMode opMode)
+    ElapsedTime time;
+    private int numberOfPosition = 1;
+    private double lastChanged = 0;
+
+
+    private ServoControl(OpMode opMode, ElapsedTime time)
     {
+        this.time = time;
         this.hardwareMap = opMode.hardwareMap;
         this.telemetry = opMode.telemetry;
         this.gamepad1 = opMode.gamepad1;
         this.gamepad2 = opMode.gamepad2;
     }
 
-    protected ServoControl(String servoName, double minPosition, double maxPosition, OpMode opMode)
+    protected ServoControl(String servoName, double minPosition, double maxPosition, OpMode opMode, ElapsedTime time)
     {
-        this(opMode);
+        this(opMode, time);
 
         try
         {
@@ -42,11 +48,35 @@ public class ServoControl
         }
         catch (IllegalArgumentException e)
         {
-            Logging.log("%s not found in Hardware Map",servoName);
             telemetry.addData("Exception:", "%s not found in Hardware Map",servoName);
             telemetry.update();
         }
 
+    }
+
+    protected void toggleDrive(boolean argument, double target1, double target2)
+    {
+        if (time.seconds() == 0)
+        {
+            time.startTime();
+        }
+
+        if (argument && numberOfPosition == 1 && (lastChanged + 0.25) < time.seconds())
+        {
+            lastChanged = time.seconds();
+            numberOfPosition = 2;
+            driveServo(target1);
+        }
+        else if (argument && numberOfPosition == 2 && (lastChanged + 0.25) < time.seconds())
+        {
+            lastChanged = time.seconds();
+            numberOfPosition = 1;
+            driveServo(target2);
+        }
+        else
+        {
+            telemetry.addData("ToggleDrive", "Something went wrong in toggleDrive");
+        }
     }
 
     protected void driveServo(double target)
@@ -67,6 +97,11 @@ public class ServoControl
         {
             driveServo(target);
         }
+    }
+
+    protected void goToCurrentPosition()
+    {
+        servo.setPosition(servo.getPosition());
     }
 
 
