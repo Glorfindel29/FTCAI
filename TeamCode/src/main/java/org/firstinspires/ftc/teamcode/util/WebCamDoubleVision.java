@@ -317,39 +317,39 @@ public class WebCamDoubleVision
     }
 
 
-    /**
-     * @param x The X coordinate of the detected object.
-     * @return AutonomousBase.SpikeLineEnum The zone in which the team prop was found.
-     */
-    public AutonomousBase.SpikeLineEnum findTarget(double x)
-    {
-        //This is supposed to find the target's position. (Made more sense than writing plain code.)
-        AutonomousBase.SpikeLineEnum targetPosition = AutonomousBase.SpikeLineEnum.UNKNOWN; //("targetPosition" means "position of the target", not "goal" position)
-
-        int leftMaximum = 220;
-        int centerMinimum = 221;
-        int centerMaximum = 459;
-        int rightMinimum = 460;
-
-        if(x < leftMaximum)
-        {   //Range for left 50-220
-            targetPosition = AutonomousBase.SpikeLineEnum.LEFT_SPIKE;
-        }
-        else if(x > centerMinimum && x <= centerMaximum)
-        {
-            //Range for the center 221 - 459
-            targetPosition = AutonomousBase.SpikeLineEnum.CENTER_SPIKE;
-        }
-        else if(x >= rightMinimum)
-        {
-            //Range for the right
-            targetPosition = AutonomousBase.SpikeLineEnum.RIGHT_SPIKE;
-        }
-        else
-        {
-            //telemetry.addData("Adjust values", "");
-        }
-
-        return targetPosition;
-    }
+//    /**
+//     * @param x The X coordinate of the detected object.
+//     * @return AutonomousBase.SpikeLineEnum The zone in which the team prop was found.
+//     */
+//    public AutonomousBase.SpikeLineEnum findTarget(double x)
+//    {
+//        //This is supposed to find the target's position. (Made more sense than writing plain code.)
+//        AutonomousBase.SpikeLineEnum targetPosition = AutonomousBase.SpikeLineEnum.UNKNOWN; //("targetPosition" means "position of the target", not "goal" position)
+//
+//        int leftMaximum = 220;
+//        int centerMinimum = 221;
+//        int centerMaximum = 459;
+//        int rightMinimum = 460;
+//
+//        if(x < leftMaximum)
+//        {   //Range for left 50-220
+//            targetPosition = AutonomousBase.SpikeLineEnum.LEFT_SPIKE;
+//        }
+//        else if(x > centerMinimum && x <= centerMaximum)
+//        {
+//            //Range for the center 221 - 459
+//            targetPosition = AutonomousBase.SpikeLineEnum.CENTER_SPIKE;
+//        }
+//        else if(x >= rightMinimum)
+//        {
+//            //Range for the right
+//            targetPosition = AutonomousBase.SpikeLineEnum.RIGHT_SPIKE;
+//        }
+//        else
+//        {
+//            //telemetry.addData("Adjust values", "");
+//        }
+//
+//        return targetPosition;
+//    }
 }   // end class

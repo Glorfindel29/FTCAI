@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 public class StopRobotOpMode extends LinearOpMode {
 
 
-    AutonomousBase autonomousBase = new AutonomousBase();
+//    AutonomousBase autonomousBase = new AutonomousBase();
 
     //DigitalChannel or touchSensor?
     DigitalChannel touchSensor;
@@ -27,8 +27,9 @@ public class StopRobotOpMode extends LinearOpMode {
           public boolean isPressed() {
 
 
-              return autonomousBase.robotIsMoving = false;
+//              return autonomousBase.robotIsMoving = false;
 
+              return false;
           }
 
           @Override

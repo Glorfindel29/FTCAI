@@ -1,0 +1,4 @@
+forward 10
+turn 90
+forward 10
+right 5
